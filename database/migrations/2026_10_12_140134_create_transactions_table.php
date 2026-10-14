@@ -14,7 +14,7 @@ return new class extends Migration
        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('person_id')->constrained('people');
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('category_id')->constrained(); // Laravel segue convenções, conhece plurais irregulares para o nome da tabela, então não é necessário especificar 'categories' (convenção sobre configuração)
             $table->string('description')->nullable();
             $table->decimal('amount', 12, 2);
             $table->string('currency', 3);

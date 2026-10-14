@@ -4,7 +4,7 @@ Aplicação web para gerir finanças pessoais, desenvolvida em Laravel. Vai perm
 
 ## Tecnologias
 
-- **Laravel 13** (PHP 8.3)
+- **Laravel 13** (PHP 8.5)
 - **MySQL**
 - **Docker** com Laravel Sail (em WSL2)
 - **Git / GitHub**
@@ -31,6 +31,11 @@ Aplicação web para gerir finanças pessoais, desenvolvida em Laravel. Vai perm
 | `people` | Pessoas a quem pertencem as transações |
 | `categories` | Categorias, cada uma do tipo receita ou despesa (enum) |
 | `transactions` | Transações com pessoa, categoria, descrição, valor, moeda e data |
+
+Algumas decisões:
+- O valor é guardado como `decimal(12, 2)` e não `float`, para evitar erros de arredondamento com dinheiro.
+- O valor é sempre positivo: é a categoria que indica se é receita ou despesa.
+- A coluna `occurred_on` tem um índice, porque os resumos mensais filtram por data.
 
 ## Como correr localmente
 
