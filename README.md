@@ -39,16 +39,19 @@ Algumas decisões:
 
 ## Como correr localmente
 
-Requisitos: Docker e, no Windows, WSL2.
+Requisitos: Docker e, no Windows, WSL2. Se aparecer `permission denied ... docker.sock`, o seu utilizador tem de estar no grupo `docker` (`sudo usermod -aG docker $USER` e reiniciar o terminal).
 
 ```bash
 git clone https://github.com/MelMorette/controlo-financeiro.git
 cd controlo-financeiro
 cp .env.example .env
 
-# instalar dependências com um container temporário
+# instalar dependências (opção A: só com Docker, sem PHP na máquina)
 docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html \
   laravelsail/php84-composer:latest composer install --ignore-platform-reqs
+
+# opção B: se já tiver PHP e Composer instalados, em vez do comando acima
+# composer install
 
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan key:generate
