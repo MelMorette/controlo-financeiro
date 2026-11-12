@@ -6,6 +6,10 @@
 </head>
 <body>
     <main>
+        @if (session('success'))
+            <p><strong>{{ session('success') }}</strong></p>
+        @endif
+
         @yield('content')
     </main>
 </body>

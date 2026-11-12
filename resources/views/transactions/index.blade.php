@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Transações</h1>
+    <a href="{{ route('transactions.create') }}">Nova transação</a>
 
     <table>
         <thead>

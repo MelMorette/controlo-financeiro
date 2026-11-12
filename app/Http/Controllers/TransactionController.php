@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
+use App\Enums\Currency;
+use App\Http\Requests\StoreTransactionRequest;
+use App\Models\Category;
+use App\Models\Person;
+
 class TransactionController extends Controller
 {
     /**
@@ -24,15 +29,23 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return view('transactions.create', [
+            'people' => Person::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get(),
+            'currencies' => Currency::cases(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTransactionRequest $request)
     {
-        //
+        Transaction::create($request->validated());
+
+        return redirect()
+            ->route('transactions.index')
+            ->with('success', 'Transação criada com sucesso.');
     }
 
     /**
