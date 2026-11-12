@@ -14,6 +14,7 @@
                 <th>Categoria</th>
                 <th>Pessoa</th>
                 <th>Valor</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +25,11 @@
                     <td>{{ $transaction->category->name }}</td>
                     <td>{{ $transaction->person->name }}</td>
                     <td>{{ number_format($transaction->amount, 2, ',', '.') }} {{ $transaction->currency->value }}</td>
+                    <td><a href="{{ route('transactions.edit', $transaction)}}">Editar</a></td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">Ainda não há transações.</td>
+                    <td colspan="6">Ainda não há transações.</td>
                 </tr>
             @endforelse
         </tbody>

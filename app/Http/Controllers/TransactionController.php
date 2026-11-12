@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use Illuminate\Http\Request;
-
-use App\Enums\Currency;
-use App\Http\Requests\StoreTransactionRequest;
 use App\Models\Category;
+use App\Enums\Currency;
 use App\Models\Person;
+use App\Http\Requests\StoreTransactionRequest;
+use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
@@ -18,8 +16,8 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::with(['person', 'category'])
-        ->latest('occurred_on')
-        ->paginate(20);
+            ->latest('occurred_on')
+            ->paginate(20);
 
         return view('transactions.index', compact('transactions'));
     }
@@ -48,28 +46,30 @@ class TransactionController extends Controller
             ->with('success', 'Transação criada com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Transaction $transaction)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return view('transactions.edit', [
+            'transaction' => $transaction,
+            'people' => Person::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get(),
+            'currencies' => Currency::cases(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(StoreTransactionRequest $request, Transaction $transaction)
     {
-        //
+        $transaction->update($request->validated());
+
+        return redirect()
+            ->route('transactions.index')
+            ->with('success', 'Transação atualizada com sucesso.');
     }
 
     /**
