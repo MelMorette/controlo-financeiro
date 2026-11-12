@@ -4,11 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Enums\CategoryType;
-use App\Models\Category;
-use App\Models\Person;
-use App\Models\Transaction;
-
 return new class extends Migration
 {
     /**

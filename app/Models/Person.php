@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Database\Factories\PersonFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    /** @use HasFactory<\Database\Factories\PersonFactory> */
+    /** @use HasFactory<PersonFactory> */
     use HasFactory;
 }

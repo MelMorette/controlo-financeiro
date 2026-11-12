@@ -2,17 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Enums\Currency;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'person_id', 'category_id', 'description', 'amount', 'currency', 'occurred_on',
+        'person_id',
+        'category_id',
+        'description',
+        'amount',
+        'currency',
+        'occurred_on',
     ];
 
     protected function casts(): array

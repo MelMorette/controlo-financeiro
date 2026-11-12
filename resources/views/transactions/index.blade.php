@@ -25,7 +25,14 @@
                     <td>{{ $transaction->category->name }}</td>
                     <td>{{ $transaction->person->name }}</td>
                     <td>{{ number_format($transaction->amount, 2, ',', '.') }} {{ $transaction->currency->value }}</td>
-                    <td><a href="{{ route('transactions.edit', $transaction)}}">Editar</a></td>
+                    <td>
+                        <a href="{{ route('transactions.edit', $transaction)}}">Editar</a>
+                        <form method="POST" action="{{ route('transactions.destroy', $transaction)}}" style="display:inline" onsubmit="return confirm('Tem certeza que deseja apagar esta transação?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Apagar</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>

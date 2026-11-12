@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Enums\Currency;
-use App\Models\Person;
 use App\Http\Requests\StoreTransactionRequest;
+use App\Models\Category;
+use App\Models\Person;
 use App\Models\Transaction;
 
 class TransactionController extends Controller
@@ -46,7 +46,6 @@ class TransactionController extends Controller
             ->with('success', 'Transação criada com sucesso.');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -77,6 +76,10 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+
+        return redirect()
+            ->route('transactions.index')
+            ->with('success', 'Transação apagada com sucesso.');
     }
 }

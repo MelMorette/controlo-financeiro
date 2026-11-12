@@ -2,12 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaction;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 use App\Enums\Currency;
 use App\Models\Category;
 use App\Models\Person;
+use App\Models\Transaction;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<Transaction>
